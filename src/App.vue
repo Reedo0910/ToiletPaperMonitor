@@ -1,28 +1,33 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>Toilet Paper Monitor</h1>
+    <paper-monitor></paper-monitor>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+  import PaperMonitor from './components/PaperMonitor.vue'
 
-export default {
-  name: 'app',
-  components: {
-    HelloWorld
+  export default {
+    name: 'app',
+    components: {
+      PaperMonitor
+    }
   }
-}
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  body {
+    font-family: "Avenir", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #fff;
+    background-color: #222;
+    padding-top: 10px;
+  }
+
+  .percent-text {
+    padding-top: 24px;
+  }
 </style>
