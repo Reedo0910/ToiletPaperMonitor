@@ -11,7 +11,7 @@
         </header>
         <div class="progress-indicator">
           <vue-circle
-            :progress="90"
+            :progress="0"
             :size="150"
             :reverse="true"
             line-cap="round"
@@ -20,7 +20,7 @@
             insert-mode="append"
             :thickness="5"
             :show-percent="true"
-            @vue-circle-progress="progress"
+            ref="circle"
           >
             <p></p>
           </vue-circle>
@@ -31,8 +31,9 @@
 </template>
 
 <script>
-  //   import VueCircle from 'vue2-circle-progress'
   import VueCircle from 'vue2-circle-progress/src/index.vue'
+  const TOTAL = 50;
+
   export default {
     components: {
       VueCircle
@@ -40,10 +41,22 @@
     data() {
       return {}
     },
+    props: ['value'],
+    watch: {
+      value: function (val) {
+        this.getProgress(val);
+      }
+    },
     methods: {
-      progress(event, progress, stepValue) {
-        console.log(stepValue);
-      },
+      getProgress: function (val) {
+        let p = (val / TOTAL) * 100;
+        p = p >= 100 ? 100 : p;
+        p = p <= 0 ? 0 : p;
+        this.$refs.circle.updateProgress(p);
+      }
+    },
+    mounted() {
+      this.getProgress(this.value);
     }
   }
 </script>
