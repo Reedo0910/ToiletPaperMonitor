@@ -1,20 +1,25 @@
 <template>
   <div id="app">
     <h1>Toilet Paper Monitor</h1>
-    <paper-monitor :value="distance"></paper-monitor>
+    <div class="container">
+      <h2>2F</h2>
+      <div class="card-group">
+        <paper-monitor-card :value="distance"></paper-monitor-card>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-  import PaperMonitor from './components/PaperMonitor.vue';
   import axios from 'axios';
+  import PaperMonitorCard from './components/PaperMonitorCard.vue';
 
   const TOKEN = 'f2778fff697836c428ed25e0827c2a555e99c55b';
 
   export default {
     name: 'app',
     components: {
-      PaperMonitor
+      PaperMonitorCard
     },
     data() {
       return {
@@ -63,5 +68,15 @@
 
   .percent-text {
     padding-top: 24px;
+  }
+
+  .container {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .card-group {
+    display: flex;
+    padding-top: 30px;
   }
 </style>

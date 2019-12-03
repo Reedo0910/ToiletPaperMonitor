@@ -1,31 +1,26 @@
 <template>
-  <div class="container">
-    <h2>2F</h2>
-    <div class="card-group">
-      <div class="card-item">
-        <header>
-          <h3>
-            201
-            <span>#2013</span>
-          </h3>
-        </header>
-        <div class="progress-indicator">
-          <vue-circle
-            :progress="0"
-            :size="150"
-            :reverse="true"
-            line-cap="round"
-            empty-fill="rgba(0, 0, 0, .1)"
-            :start-angle="-1/2*Math.PI"
-            insert-mode="append"
-            :thickness="5"
-            :show-percent="true"
-            ref="circle"
-          >
-            <p></p>
-          </vue-circle>
-        </div>
-      </div>
+  <div class="card-item">
+    <header>
+      <h3>
+        201
+        <span>#2013</span>
+      </h3>
+    </header>
+    <div class="progress-indicator">
+      <vue-circle
+        :progress="0"
+        :size="150"
+        :reverse="true"
+        line-cap="round"
+        empty-fill="rgba(0, 0, 0, .1)"
+        :start-angle="-1/2*Math.PI"
+        insert-mode="append"
+        :thickness="5"
+        :show-percent="true"
+        ref="circle"
+      >
+        <p></p>
+      </vue-circle>
     </div>
   </div>
 </template>
@@ -62,16 +57,6 @@
 </script>
 
 <style scoped>
-  .container {
-    width: 90%;
-    margin: 0 auto;
-  }
-
-  .card-group {
-    display: flex;
-    padding-top: 30px;
-  }
-
   .card-item {
     width: 240px;
     height: 300px;
