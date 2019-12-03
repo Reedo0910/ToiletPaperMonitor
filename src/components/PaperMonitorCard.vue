@@ -2,8 +2,8 @@
   <div class="card-item">
     <header>
       <h3>
-        201
-        <span>#2013</span>
+        {{ title }}
+        <span>#{{ id }}</span>
       </h3>
     </header>
     <div class="progress-indicator">
@@ -27,7 +27,6 @@
 
 <script>
   import VueCircle from 'vue2-circle-progress/src/index.vue'
-  const TOTAL = 50;
 
   export default {
     components: {
@@ -36,7 +35,24 @@
     data() {
       return {}
     },
-    props: ['value'],
+    props: {
+      id: {
+        type: String,
+        required: true
+      },
+      title: {
+        type: String,
+        required: true
+      },
+      value: {
+        type: Number,
+        required: true
+      },
+      total: {
+        type: Number,
+        default: 50
+      }
+    },
     watch: {
       value: function (val) {
         this.getProgress(val);
@@ -44,9 +60,8 @@
     },
     methods: {
       getProgress: function (val) {
-        let p = (val / TOTAL) * 100;
-        p = p >= 100 ? 100 : p;
-        p = p <= 0 ? 0 : p;
+        let p = (val / this.total) * 100;
+        p = p >= 100 ? 100 : (p <= 0 ? 0 : p);
         this.$refs.circle.updateProgress(p);
       }
     },

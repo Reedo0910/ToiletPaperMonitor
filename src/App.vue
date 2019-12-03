@@ -4,7 +4,7 @@
     <div class="container">
       <h2>2F</h2>
       <div class="card-group">
-        <paper-monitor-card :value="distance"></paper-monitor-card>
+        <paper-monitor-card :value="distance" :title="'201'" :id="'2013'" :total="50"></paper-monitor-card>
       </div>
     </div>
   </div>
