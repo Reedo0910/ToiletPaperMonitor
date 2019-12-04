@@ -46,8 +46,13 @@
                 0,
                 "windows"
             ],
-            "semi": [0],
-            "space-before-function-paren": [0, "always"],
+            "semi": [
+                0
+            ],
+            "space-before-function-paren": [
+                0,
+                "always"
+            ],
             "no-use-before-define": 0,
             "no-undef": 0,
             "no-unused-vars": 0,

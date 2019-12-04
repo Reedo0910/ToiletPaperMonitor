@@ -1,10 +1,26 @@
 <template>
   <div id="app">
     <h1>Toilet Paper Monitor</h1>
+    <div>
+      <label for="percentage">show percentage</label>
+      <input type="checkbox" name id="percentage" v-model="isShowPercentage" />
+    </div>
     <div class="container">
-      <h2>2F</h2>
       <div class="card-group">
-        <paper-monitor-card :value="distance" :title="'201'" :id="'2013'" :total="50"></paper-monitor-card>
+        <paper-monitor-card
+          :value="distance1"
+          :title="'GOL'"
+          :id="'201-3'"
+          :total="50"
+          :show-circle="isShowPercentage"
+        ></paper-monitor-card>
+        <paper-monitor-card
+          :value="distance2"
+          :title="'GOL'"
+          :id="'201-4'"
+          :total="50"
+          :show-circle="isShowPercentage"
+        ></paper-monitor-card>
       </div>
     </div>
   </div>
@@ -23,7 +39,9 @@
     },
     data() {
       return {
-        distance: 0
+        distance1: 0,
+        distance2: 0,
+        isShowPercentage: false
       }
     },
     methods: {
@@ -31,14 +49,11 @@
         const vm = this;
         axios.get(`https://api.particle.io/v1/devices/2b0034000647373034353237/force_level?access_token=${TOKEN}`)
           .then(function (res) {
-            // handle success
             const temp = vm.getDistance(res.data.result);
-            vm.distance = temp < 0 ? 0 : temp;
-            // console.log(temp);
+            vm.distance1 = temp < 0 ? 0 : temp;
           })
           .catch(function (error) {
-            // handle error
-            console.log(error);
+            console.error(error);
           })
       },
       getDistance: function (value) {
@@ -50,7 +65,15 @@
       vm.getPhotonData();
       setInterval(() => {
         vm.getPhotonData();
-      }, 5000);
+      }, 3000);
+
+      if (window.Notification && Notification.permission !== 'granted') {
+        Notification.requestPermission(function (status) {
+          if (Notification.permission !== status) {
+            Notification.permission = status;
+          }
+        });
+      }
     }
   }
 </script>
@@ -64,6 +87,10 @@
     color: #fff;
     background-color: #222;
     padding-top: 10px;
+  }
+
+  label {
+    margin-right: 0.5em;
   }
 
   .percent-text {
