@@ -1,5 +1,8 @@
 # Toilet Paper
 
+## Tutorial
+Check out our tutorial [here]('https://github.com/Reedo0910/ToiletPaperMonitor/blob/master/doc/Tutorial.pdf') 
+
 ## Project setup
 ```
 yarn install
