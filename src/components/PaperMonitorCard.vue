@@ -2,8 +2,10 @@
   <div class="card-item" :class="{'has-circle': showCircle}">
     <header>
       <h3>
-        {{ title }}
-        <span>#{{ id }}</span>
+        <router-link :to="id">
+          {{ title }}
+          <span>#{{ id }}</span>
+        </router-link>
       </h3>
     </header>
     <div class="progress-indicator">
@@ -88,6 +90,22 @@
         if (!this.isInit) {
           this.isInit = true;
         }
+
+        let myRecord = localStorage.getItem('d' + this.id);
+        let lastRecord = localStorage.getItem('l' + this.id);
+        if (myRecord && lastRecord) {
+          let newRecord = parseInt(myRecord);
+          let newLastRecord = parseInt(lastRecord);
+          const deviation = newLastRecord - this.progressValue;
+          if (deviation > 0) {
+            newRecord += deviation;
+            localStorage.setItem('d' + this.id, newRecord.toString())
+          }
+          localStorage.setItem('l' + this.id, this.progressValue.toString())
+        } else {
+          localStorage.setItem('d' + this.id, this.progressValue.toString())
+          localStorage.setItem('l' + this.id, this.progressValue.toString())
+        }
       }
     },
     methods: {
@@ -145,7 +163,7 @@
           alert(NotificationContent);
         }
 
-        axios.post('https://maker.ifttt.com/trigger/paper_running_low/with/key/Nl5_maYfTf9Cz6yUe0ZN0', {
+        axios.post(process.env.VUE_APP_IFTTT_ACCESS_API, {
           'value1': this.id,
           'value2': this.title
         })
