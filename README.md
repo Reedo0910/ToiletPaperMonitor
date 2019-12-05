@@ -14,7 +14,7 @@ Check out our tutorial [here](https://github.com/Reedo0910/ToiletPaperMonitor/bl
 
 
 
-## Project setup
+## Project Setup
 
 1. Install project dependencies
 
