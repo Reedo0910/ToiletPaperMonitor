@@ -1,4 +1,4 @@
-# toilet-paper
+# Toilet Paper
 
 ## Project setup
 ```
