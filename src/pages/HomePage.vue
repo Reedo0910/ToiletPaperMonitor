@@ -101,7 +101,7 @@
       setInterval(() => {
         vm.getPhoton1Data();
         vm.getPhoton2Data();
-      }, 10 * 1000);
+      }, 60 * 1000);
 
       setInterval(() => {
         if (new Date().getHours() === 23) {
