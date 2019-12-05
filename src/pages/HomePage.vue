@@ -65,6 +65,7 @@
           })
       },
       getDistance: function (value) {
+        // get distance of remaining paper roll
         return Math.ceil((0.3846 * value - 189.47) / 10);
       },
       saveData: function () {
@@ -74,7 +75,7 @@
         let savedData2 = JSON.parse(localStorage.getItem('c' + '201-4'));
 
         const today = new Date(new Date().setHours(0, 0, 0, 0)).toString();
-
+        // if today's record is not saved, then save it to local storage
         if (Date.parse(savedData1[savedData1.length - 1].t) !== Date.parse(today)) {
           const newData1 = {
             t: today,
@@ -95,6 +96,7 @@
       }
     },
     mounted() {
+      // get data from photon every 60s
       const vm = this;
       vm.getPhoton1Data();
       vm.getPhoton2Data();
@@ -103,6 +105,7 @@
         vm.getPhoton2Data();
       }, 60 * 1000);
 
+      // save daily record at 11pm
       setInterval(() => {
         if (new Date().getHours() === 23) {
           vm.saveData();

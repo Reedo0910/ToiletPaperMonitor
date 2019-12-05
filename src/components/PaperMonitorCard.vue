@@ -31,6 +31,7 @@
       <p>{{ myText }}</p>
     </div>
     <div>
+      <!-- indicator bar -->
       <ul class="indicator-item-list">
         <li
           class="indicator-item"
@@ -86,11 +87,12 @@
     },
     watch: {
       value: function (val) {
+        // get progress when value changes
         this.getProgress(val);
         if (!this.isInit) {
           this.isInit = true;
         }
-
+        // Calculate & store daily consumption record to local storage
         let myRecord = localStorage.getItem('d' + this.id);
         let lastRecord = localStorage.getItem('l' + this.id);
         if (myRecord && lastRecord) {
@@ -111,11 +113,14 @@
     methods: {
       getProgress: function (val) {
         let p = (val / this.total) * 100;
+        // make sure percentage not higher than 100, not lower than 0
         p = p >= 100 ? 100 : (p <= 0 ? 0 : p);
         this.progressValue = p;
+        // update circle progress
         this.$refs.circle.updateProgress(p);
       },
       progressing: function (event, progress, stepValue) {
+        // Change color of the circle progress while percentage < 20
         if (stepValue < 20) {
           this.$refs.circle.updateFill('#ff0000');
         } else {
@@ -123,6 +128,7 @@
         }
       },
       progressEnd: function () {
+        // devide 100% progress into 5 sections
         if (this.progressValue >= 80) {
           this.identifierCount = 4;
         } else if (this.progressValue >= 60 && this.progressValue < 80) {
@@ -134,7 +140,7 @@
         } else {
           this.identifierCount = 0;
         }
-
+        // set indicating text
         if (this.progressValue < 20) {
           this.myText = 'Warning: Refill needed';
           if (this.isInit === true) {
@@ -145,6 +151,7 @@
         }
       },
       sendNotification: function () {
+        // if paper is running low, send HTML5 notifications
         const NotificationContent = `Paper #${this.id} in ${this.title} is running low`;
         if (window.Notification && Notification.permission === 'granted') {
           let n = new Notification(NotificationContent);
@@ -162,7 +169,7 @@
         } else {
           alert(NotificationContent);
         }
-
+        // send slack notifications as well
         axios.post(process.env.VUE_APP_IFTTT_ACCESS_API, {
           'value1': this.id,
           'value2': this.title
@@ -173,6 +180,7 @@
       }
     },
     mounted() {
+      // get progress when init
       this.getProgress(this.value);
     }
   }

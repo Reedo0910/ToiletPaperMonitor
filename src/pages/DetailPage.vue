@@ -36,12 +36,13 @@
     },
     computed: {
       getDataSets: function () {
+        // format data and pass it to the diagram
         data.datasets[0].data = this.dataArray.concat();
         return data;
       }
     },
     beforeMount() {
-      //  
+      // get records of past 7 days from loacl storage
       this.dataArray = JSON.parse(localStorage.getItem('c' + this.$route.params.id));
     }
   }
